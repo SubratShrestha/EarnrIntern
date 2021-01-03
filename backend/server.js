@@ -1,11 +1,13 @@
 var express = require("express");
 var app = express();
 var db = require("./database.js");
+var cors = require('cors');
 
 // idk
 var bodyParser = require("body-parser");
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 
 // Server port.
 var HTTP_PORT = 8000;
@@ -38,14 +40,6 @@ app.get("/api/investments", (req, res, next) => {
 
 // Create new investment.
 app.post("/api/invest/new", (req, res) => {
-    var errors = [];
-    if (!req.body.email) {
-        errors.push("No email specified");
-    }
-    if (errors.length) {
-        res.status(400).json({ "error": errors.join(",") });
-        return;
-    }
     var data = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
@@ -53,11 +47,11 @@ app.post("/api/invest/new", (req, res) => {
         dob: req.body.dob,
         number: req.body.number,
         amount: req.body.amount,
-        prem: req.body.prem,
-        sel: req.body.sel,
+        type: req.body.type
     }
-    var sql = 'INSERT INTO investments (firstname, lastname, email, dob, number, amount, prem, sel) VALUES (?,?,?,?,?,?,?,?)';
-    var params = [data.firstname, data.lastname, data.email, data.dob, data.number, data.amount, data.prem, data.sel];
+    console.log(data);
+    var sql = 'INSERT INTO investments (firstname, lastname, email, dob, number, amount, type) VALUES (?,?,?,?,?,?,?)';
+    var params = [data.firstname, data.lastname, data.email, data.dob, data.number, data.amount, data.type];
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({ "error": err.message })

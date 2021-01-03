@@ -34,17 +34,16 @@ function App() {
     if (!form.check()) {
       return;
     }
-    console.log('submitting')
-    //   fetch('http://localhost:8000/api/invest/new', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify({
-    //       ...formValue
-    //     }).then(res => res.json()).then(data => console.log(data));
-    //   })
-    // }
+
+    fetch('http://localhost:8000/api/invest/new', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        ...formValue
+      })
+    }).then(res => res.json()).then(data => console.log(data));
   }
 
   return (

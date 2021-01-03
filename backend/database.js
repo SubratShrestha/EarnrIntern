@@ -12,12 +12,11 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
         db.run(`CREATE TABLE investments (
             firstname TEXT,
             lastname TEXT,
-            dob TEXT,
-            number INTEGER UNIQUE,
-            amount REAL,
-            prem INTEGER DEFAULT '0',
-            sel INTEGER DEFAULT '0',
             email text UNIQUE,
+            dob TEXT,
+            number INTEGER,
+            amount REAL,
+            type TEXT,
             CONSTRAINT email_unique UNIQUE (email)
             )`,
             (err) => {
