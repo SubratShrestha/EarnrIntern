@@ -49,7 +49,6 @@ app.post("/api/invest/new", (req, res) => {
         amount: req.body.amount,
         type: req.body.type
     }
-    console.log(data);
     var sql = 'INSERT INTO investments (firstname, lastname, email, dob, number, amount, type) VALUES (?,?,?,?,?,?,?)';
     var params = [data.firstname, data.lastname, data.email, data.dob, data.number, data.amount, data.type];
     db.run(sql, params, function (err, result) {
