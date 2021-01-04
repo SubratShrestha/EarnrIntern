@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import {
   Schema,
   Form,
@@ -92,7 +92,7 @@ export default function InvestmentForm() {
         from: 'throwaway.earnr@gmail.com',
         to: formValue.email,
         subject: 'Investment Confirmed',
-        text: `Congratulations on your Investment!\n\nYour ${formValue.type} investment of ${formValue.amount} with Earnr has been confirmed.\n\nThank you for choosing Earnr!\n\nSincerely,\nEarnr Team.`,
+        text: `Congratulations on your Investment!\n\nHey ${formValue.firstname},\n\nYour ${formValue.type} investment of $${formValue.amount} with Earnr has been confirmed.\n\nThank you for choosing Earnr!\n\nSincerely,\nEarnr Team.`,
       })
     }).then(res => console.log(res));
   }
