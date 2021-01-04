@@ -19,7 +19,7 @@ function App() {
     <Router>
       <Navbar appearance="inverse">
         <Navbar.Header>
-          <a href="#" style={{ padding: '18px 20px', display: 'inline-block' }}>EARNR</a>
+          <p style={{ padding: '18px 20px', display: 'inline-block' }}>EARNR</p>
         </Navbar.Header>
         <Navbar.Body>
           <Nav>

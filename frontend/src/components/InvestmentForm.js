@@ -140,7 +140,11 @@ export default function InvestmentForm() {
           <Button appearance="primary" onClick={handleSubmit}>Submit</Button>
         </FormGroup>
       </Form>
-      <Modal show={modalShow} onHide={() => setModalShow(false)}>
+      <Modal
+        show={modalShow}
+        onHide={() => setModalShow(false)}
+        size="xs"
+      >
         <Modal.Header>
           <h5>Investment Confirmed</h5>
         </Modal.Header>
@@ -148,7 +152,7 @@ export default function InvestmentForm() {
           <Icon icon="check" size="2x" style={{ color: '#AED582' }} />
           <p>Congratulations!</p>
           <p>You have successfully made an investment with Earnr!</p>
-          <p>You will be contacted by the team shortly via email</p>
+          <p>You will be contacted by the team shortly via email.</p>
           <p>Thank you for choosing Earnr!</p>
         </Modal.Body>
         <Modal.Footer>

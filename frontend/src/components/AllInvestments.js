@@ -20,10 +20,8 @@ export default function AllInvestments() {
   }, []);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <div style={{ width: '50%' }}>
-        <h2>All Investments</h2>
-      </div>
+    <div style={{ width: '80%', margin: 'auto' }}>
+      <h2>All Investments</h2>
       {
         loading ?
           <Placeholder.Paragraph rows={6}>
@@ -32,24 +30,31 @@ export default function AllInvestments() {
           :
           <Table
             height={400}
-            width={650}
             data={investments.data}
           >
-            <Table.Column width={150} align="center" fixed>
+            <Table.Column width={150}>
               <Table.HeaderCell>First Name</Table.HeaderCell>
               <Table.Cell dataKey="firstname" />
             </Table.Column>
-            <Table.Column width={150} align="center" fixed>
+            <Table.Column width={150}>
               <Table.HeaderCell>Last Name</Table.HeaderCell>
               <Table.Cell dataKey="lastname" />
             </Table.Column>
-            <Table.Column width={100} align="center" fixed>
+            <Table.Column width={100}>
               <Table.HeaderCell>Amount</Table.HeaderCell>
               <Table.Cell dataKey="amount" style={{ color: '#AED582' }} />
             </Table.Column>
-            <Table.Column width={150} align="center" fixed>
+            <Table.Column width={150}>
               <Table.HeaderCell>Type</Table.HeaderCell>
               <Table.Cell dataKey="type" />
+            </Table.Column>
+            <Table.Column width={200}>
+              <Table.HeaderCell>Email</Table.HeaderCell>
+              <Table.Cell dataKey="email" />
+            </Table.Column>
+            <Table.Column width={150}>
+              <Table.HeaderCell>Phone number</Table.HeaderCell>
+              <Table.Cell dataKey="number" />
             </Table.Column>
           </Table>
       }
