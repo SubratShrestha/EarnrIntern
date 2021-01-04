@@ -69,6 +69,8 @@ export default function InvestmentForm() {
       return;
     }
     setModalShow(true);
+
+    // Storing data into database.
     fetch('http://localhost:8000/api/invest/new', {
       method: 'POST',
       headers: {
@@ -77,7 +79,22 @@ export default function InvestmentForm() {
       body: JSON.stringify({
         ...formValue
       })
-    }).then(res => res.json()).then(data => console.log(data));
+    });
+
+    // Sending confirmation email.
+    console.log('sending email');
+    fetch('http://localhost:8000/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'throwaway.earnr@gmail.com',
+        to: formValue.email,
+        subject: 'Investment Confirmed',
+        text: `Congratulations on your Investment!\n\nYour ${formValue.type} investment of ${formValue.amount} with Earnr has been confirmed.\n\nThank you for choosing Earnr!\n\nSincerely,\nEarnr Team.`,
+      })
+    }).then(res => console.log(res));
   }
 
   return (

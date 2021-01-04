@@ -16,8 +16,7 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
             dob TEXT,
             number INTEGER,
             amount REAL,
-            type TEXT,
-            CONSTRAINT email_unique UNIQUE (email)
+            type TEXT
             )`,
             (err) => {
                 if (err) {

@@ -1,16 +1,18 @@
-var express = require("express");
-var app = express();
-var db = require("./database.js");
-var cors = require('cors');
+// packages
+const express = require("express");
+let app = express();
+const db = require("./database.js");
+const cors = require('cors');
+const nodemailer = require('nodemailer');
+const bodyParser = require("body-parser");
 
-// idk
-var bodyParser = require("body-parser");
+// Server port.
+const HTTP_PORT = 8000;
+
+// Services
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-
-// Server port.
-var HTTP_PORT = 8000;
 
 // Start server.
 app.listen(HTTP_PORT, () => {
@@ -40,7 +42,7 @@ app.get("/api/investments", (req, res, next) => {
 
 // Create new investment.
 app.post("/api/invest/new", (req, res) => {
-    var data = {
+    let data = {
         firstname: req.body.firstname,
         lastname: req.body.lastname,
         email: req.body.email,
@@ -49,8 +51,8 @@ app.post("/api/invest/new", (req, res) => {
         amount: req.body.amount,
         type: req.body.type
     }
-    var sql = 'INSERT INTO investments (firstname, lastname, email, dob, number, amount, type) VALUES (?,?,?,?,?,?,?)';
-    var params = [data.firstname, data.lastname, data.email, data.dob, data.number, data.amount, data.type];
+    let sql = 'INSERT INTO investments (firstname, lastname, email, dob, number, amount, type) VALUES (?,?,?,?,?,?,?)';
+    let params = [data.firstname, data.lastname, data.email, data.dob, data.number, data.amount, data.type];
     db.run(sql, params, function (err, result) {
         if (err) {
             res.status(400).json({ "error": err.message })
@@ -64,6 +66,37 @@ app.post("/api/invest/new", (req, res) => {
     });
 })
 
+// Send email post request
+app.post("/email", (req, res) => {
+    let body = {
+        from: req.body.from,
+        to: req.body.to,
+        subject: req.body.subject,
+        text: req.body.text,
+    };
+
+    // Nodemailer transport
+    let transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: "throwaway.earnr@gmail.com",
+            pass: "EarnrFullstack"
+        }
+    });
+
+    // Send email
+    transporter.sendMail(body, (err, data) => {
+        if (err) {
+            res.status(400).json({ "error": err.message })
+            return;
+        }
+        res.json({
+            "message": "success",
+            "data": data,
+            "id": this.lastID
+        })
+    });
+});
 
 // Default response for any other request
 app.use(function (req, res) {
