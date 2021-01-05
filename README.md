@@ -16,13 +16,24 @@ This info should be stored in a database.
 
 ### Frontend
 
-The frontend for the application was written in ReactJS with some other dependencies mentioned in the frontend directory. 
+The frontend for the application was written in ReactJS and the UI components are from Rsuite.
+
+Documentation:
+* [React](https://reactjs.org/docs/getting-started.html)
+* [Rsuite](https://rsuitejs.com/guide/introduction/)
 
 ### Backend
 
-The backend is a simple server written in express.js which is a simple nodeJS framework, as suggested. 
+The backend is a server written in express.js which is a simple nodeJS framework, as suggested. 
 
-The database was written in sqlite3, a very simple but powerful database tool.
+The database was written with sqlite3, a basic but powerful database tool.
+
+The email functionality is written with Nodemailer, which is a module for Node.JS that allows sending of emails.
+
+Documentation:
+* [Node.JS](https://nodejs.org/en/docs/)
+* [SQLite3](https://www.sqlite.org/docs.html)
+* [Nodemailer](https://nodemailer.com/about/)
 
 
 ## Run
