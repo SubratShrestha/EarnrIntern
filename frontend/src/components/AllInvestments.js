@@ -11,7 +11,7 @@ export default function AllInvestments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:8000/api/investments')
+    fetch('/api/investments')
       .then(res => res.json())
       .then(data => {
         setInvestments(data);

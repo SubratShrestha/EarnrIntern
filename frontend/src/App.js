@@ -19,7 +19,9 @@ function App() {
     <Router>
       <Navbar appearance="inverse">
         <Navbar.Header>
-          <p style={{ padding: '18px 20px', display: 'inline-block' }}>EARNR</p>
+          <Link to="/">
+            <p style={{ padding: '18px 20px', display: 'inline-block' }}>EARNR</p>
+          </Link>
         </Navbar.Header>
         <Navbar.Body>
           <Nav>

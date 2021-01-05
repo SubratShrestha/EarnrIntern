@@ -71,7 +71,7 @@ export default function InvestmentForm() {
     setModalShow(true);
 
     // Storing data into database.
-    fetch('http://localhost:8000/api/invest/new', {
+    fetch('/api/invest/new', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -82,8 +82,7 @@ export default function InvestmentForm() {
     });
 
     // Sending confirmation email.
-    console.log('sending email');
-    fetch('http://localhost:8000/email', {
+    fetch('/api/email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -180,6 +179,8 @@ export default function InvestmentForm() {
   );
 }
 
+// Returns a FormGroup for any given rsuite component (accepter),
+// such that its data is passed into the FormValue.
 function CustomField({ accepter, name, label, ...props }) {
   return (
     <FormGroup>

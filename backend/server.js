@@ -1,33 +1,25 @@
 // packages
 const express = require("express");
-let app = express();
+const path = require('path');
+const app = express();
 const db = require("./database.js");
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 const bodyParser = require("body-parser");
 
 // Server port.
-const HTTP_PORT = 8000;
+const HTTP_PORT = process.env.PORT || 8000;
 
 // Services
+app.use(express.static(path.join(__dirname, 'client/build')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
 
-// Start server.
-app.listen(HTTP_PORT, () => {
-    console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT));
-});
-
-// Root endpoint.
-app.get("/", (req, res, next) => {
-    res.json({ "message": "Ok" });
-});
-
 // Get all investments.
 app.get("/api/investments", (req, res, next) => {
-    var sql = "select * from investments";
-    var params = [];
+    const sql = "select * from investments";
+    let params = [];
     db.all(sql, params, (err, rows) => {
         if (err) {
             res.status(400).json({ "error": err.message });
@@ -67,7 +59,7 @@ app.post("/api/invest/new", (req, res) => {
 })
 
 // Send email post request
-app.post("/email", (req, res) => {
+app.post("/api/email", (req, res) => {
     let body = {
         from: req.body.from,
         to: req.body.to,
@@ -98,7 +90,13 @@ app.post("/email", (req, res) => {
     });
 });
 
-// Default response for any other request
-app.use(function (req, res) {
-    res.status(404);
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
+});
+
+// Start server.
+app.listen(HTTP_PORT, () => {
+    console.log("Server running on port %PORT%".replace("%PORT%", HTTP_PORT));
 });

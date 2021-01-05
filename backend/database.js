@@ -1,5 +1,10 @@
-var sqlite3 = require('sqlite3').verbose();
+/*
+    Setting up database with Sqlite3.
+    Docs:
+        https://www.sqlite.org/docs.html
+*/
 
+const sqlite3 = require('sqlite3').verbose();
 const DBSOURCE = "db.sqlite";
 
 let db = new sqlite3.Database(DBSOURCE, (err) => {
@@ -26,9 +31,9 @@ let db = new sqlite3.Database(DBSOURCE, (err) => {
                     // Table just created, creating some rows
                     console.log('just created the table');
                 }
-            });
+            }
+        );
     }
 });
-
 
 module.exports = db;
